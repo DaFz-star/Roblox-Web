@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Hub Share By DaFz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes rgbBorder {
+            0% { border-color: #ff0000; }
+            16% { border-color: #ff9900; }
+            32% { border-color: #ffff00; }
+            48% { border-color: #00ff00; }
+            64% { border-color: #0099ff; }
+            80% { border-color: #9900ff; }
+            100% { border-color: #ff0000; }
+        }
+
+        @keyframes rgbGlow {
+            0% { box-shadow: 0 0 20px #ff0000; }
+            16% { box-shadow: 0 0 20px #ff9900; }
+            32% { box-shadow: 0 0 20px #ffff00; }
+            48% { box-shadow: 0 0 20px #00ff00; }
+            64% { box-shadow: 0 0 20px #0099ff; }
+            80% { box-shadow: 0 0 20px #9900ff; }
+            100% { box-shadow: 0 0 20px #ff0000; }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ff0000;
+            animation: rgbBorder 3s linear infinite, rgbGlow 3s linear infinite;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .form-group input:focus {
+            border-color: #ff0000;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #ff0000;
+            color: white;
+            animation: rgbGlow 3s linear infinite;
+        }
+
+        .btn-secondary {
+            background: #2a2a2a;
+            color: #fff;
+            border: 2px solid #333;
+        }
+
+        .main-app {
+            display: none;
+        }
+
+        header {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ff0000;
+            animation: rgbBorder 3s linear infinite;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ff0000;
+            animation: rgbGlow 3s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .id-section {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #ff0000;
+            animation: rgbBorder 3s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .id-display {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .id-text {
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #ff0000;
+            animation: rgbBorder 3s linear infinite;
+        }
+
+        .section-header {
+            background: #ff0000;
+            animation: rgbGlow 3s linear infinite;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .upload-area {
+            border: 3px dashed #333;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: #ff0000;
+        }
+
+        .scripts-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .script-item {
+            background: #2a2a2a;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .script-item:hover {
+            transform: translateX(5px);
+            border-left-width: 6px;
+        }
+
+        .script-item.expanded {
+            background: #333;
+        }
+
+        .script-preview {
+            display: block;
+        }
+
+        .script-full {
+            display: none;
+        }
+
+        .script-item.expanded .script-preview {
+            display: none;
+        }
+
+        .script-item.expanded .script-full {
+            display: block;
+        }
+
+        .script-code {
+            background: #000;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #25D366;
+            border: 3px solid #fff;
+            animation: rgbBorder 3s linear infinite, rgbGlow 3s linear infinite;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            z-index: 1000;
+        }
+
+        .chat-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 2000;
+            display: none;
+            padding: 20px;
+        }
+
+        .chat-fullscreen.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-header {
+            background: #25D366;
+            animation: rgbGlow 3s linear infinite;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #0a0a0a;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #333;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .message.sent {
+            background: #056162;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.received {
+            background: #1f1f1f;
+        }
+
+        .message-sender {
+            font-size: 12px;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 5px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 25px;
+            outline: none;
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .chat-input-area button {
+            padding: 12px 25px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>🎮 Roblox Hub Share By DaFz</h1>
+            
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Masukkan username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Masukkan password">
+            </div>
+            
+            <button class="btn btn-primary" type="button" onclick="loginUser()">🔓 Login</button>
+            <button class="btn btn-secondary" type="button" onclick="registerUser()">✨ Daftar Baru</button>
+            <button class="btn btn-secondary" type="button" onclick="googleLogin()">
+                🔵 Login dengan Google
+            </button>
+            
+            <div style="text-align: center; margin-top: 20px; padding: 10px; background: #2a2a2a; border-radius: 8px;">
+                <p style="color: #888; font-size: 12px;">💡 Tips: Akun demo tersedia (demo/demo123)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-app" id="mainApp">
+        <header>
+            <div class="user-info">
+                <div class="user-avatar" id="avatar">U</div>
+                <div>
+                    <div style="font-weight: bold; font-size: 18px;" id="userName">Username</div>
+                    <div style="color: #aaa; font-size: 14px;" id="userEmail">email@example.com</div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
+                <a href="https://www.roblox.com/users/search?keyword=rez_sukamakan" target="_blank" style="padding: 10px 20px; background: #e74c3c; color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">
+                    🎮 Roblox: rez_sukamakan
+                </a>
+                <a href="https://www.tiktok.com/@dafz_bobox" target="_blank" style="padding: 10px 20px; background: #000; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; border: 2px solid #fff;">
+                    📱 TikTok: @dafz_bobox
+                </a>
+                <a href="https://wa.me/6281215315308" target="_blank" style="padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">
+                    💬 WhatsApp: +62 812-1531-5308
+                </a>
+            </div>
+            
+            <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        </header>
+
+        <div class="id-section">
+            <h2 style="margin-bottom: 15px;">🎯 Your Unique ID</h2>
+            <p style="color: #aaa; font-size: 13px; margin-bottom: 10px;">ID ini khusus untuk kamu! Simpan baik-baik.</p>
+            <div class="id-display">
+                <div>
+                    <div style="color: #aaa; font-size: 12px; margin-bottom: 5px;">Delta/Studio Lite ID:</div>
+                    <div class="id-text" id="userId">LOADING...</div>
+                </div>
+                <button class="copy-btn" onclick="copyUserId()">📋 Copy</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section">
+                <div class="section-header">📤 Upload Script</div>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div style="font-size: 48px; margin-bottom: 10px;">📁</div>
+                    <div style="color: #aaa;">Klik untuk upload file .txt atau .lua</div>
+                </div>
+                <input type="file" id="fileInput" accept=".txt,.lua" style="display: none;">
+                
+                <div class="form-group">
+                    <label>Nama Script</label>
+                    <input type="text" id="scriptName" placeholder="Contoh: Auto Farm Blox Fruits">
+                </div>
+                <div class="form-group">
+                    <label>Keterangan Singkat</label>
+                    <input type="text" id="scriptDesc" placeholder="Contoh: Script auto farm level cepat">
+                </div>
+                <button class="btn btn-primary" onclick="saveNewScript()">💾 Simpan Script</button>
+            </div>
+
+            <div class="section">
+                <div class="section-header">📜 Daftar Script</div>
+                <div class="scripts-list" id="scriptsList"></div>
+            </div>
+        </div>
+
+        <div class="chat-button" onclick="openChatWindow()">💬</div>
+
+        <div class="chat-fullscreen" id="chatWindow">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <span>💬 Global Chat</span>
+                    <button style="background: #e74c3c; border: none; color: white; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;" onclick="closeChatWindow()">✖ Tutup</button>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Ketik pesan...">
+                    <button onclick="sendChatMessage()">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let scriptContent = '';
+
+        function generateId() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let id = 'DAFZ-';
+            for (let i = 0; i < 12; i++) {
+                id += chars[Math.floor(Math.random() * chars.length)];
+                if ((i + 1) % 4 === 0 && i !== 11) id += '-';
+            }
+            return id;
+        }
+
+        function init() {
+            console.log('Initializing...');
+            const users = localStorage.getItem('robloxUsers');
+            if (!users) {
+                const defaultUsers = {
+                    demo: {
+                        password: 'demo123',
+                        email: 'demo@robloxhub.com',
+                        id: generateId()
+                    }
+                };
+                localStorage.setItem('robloxUsers', JSON.stringify(defaultUsers));
+                console.log('Demo account created');
+            }
+            
+            document.getElementById('username').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginUser();
+            });
+            
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginUser();
+            });
+        }
+
+        function loginUser() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+
+            if (!user || !pass) {
+                alert('⚠️ Username dan password harus diisi!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('robloxUsers') || '{}');
+            
+            if (!users[user]) {
+                alert('⚠️ Username tidak ditemukan! Silakan daftar dulu.');
+                return;
+            }
+
+            if (users[user].password !== pass) {
+                alert('⚠️ Password salah!');
+                return;
+            }
+
+            currentUser = { username: user, ...users[user] };
+            showApp();
+        }
+
+        function registerUser() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+
+            if (!user || !pass) {
+                alert('⚠️ Username dan password harus diisi!');
+                return;
+            }
+
+            if (user.length < 3) {
+                alert('⚠️ Username minimal 3 karakter!');
+                return;
+            }
+
+            if (pass.length < 6) {
+                alert('⚠️ Password minimal 6 karakter!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('robloxUsers') || '{}');
+            
+            if (users[user]) {
+                alert('⚠️ Username sudah digunakan!');
+                return;
+            }
+
+            users[user] = {
+                password: pass,
+                email: user + '@robloxhub.com',
+                id: generateId()
+            };
+
+            localStorage.setItem('robloxUsers', JSON.stringify(users));
+            currentUser = { username: user, ...users[user] };
+            
+            alert('✅ Registrasi berhasil! Selamat datang!');
+            showApp();
+        }
+
+        function googleLogin() {
+            const randomNum = Math.floor(Math.random() * 10000);
+            const user = 'google_' + randomNum;
+            
+            const users = JSON.parse(localStorage.getItem('robloxUsers') || '{}');
+            users[user] = {
+                password: 'google' + randomNum,
+                email: user + '@gmail.com',
+                id: generateId()
+            };
+            
+            localStorage.setItem('robloxUsers', JSON.stringify(users));
+            currentUser = { username: user, ...users[user] };
